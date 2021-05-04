@@ -20,8 +20,7 @@
 
         <receiver android:name=".MeuReceiver" >
             <intent-filter>
-                <action android:name="com.tony.meubroadcastreceiver.MEUBROADCAST">
-                </action>
+                <action android:name="com.tony.meubroadcastreceiver.MEUBROADCAST" />
             </intent-filter>
         </receiver>
     </application>
