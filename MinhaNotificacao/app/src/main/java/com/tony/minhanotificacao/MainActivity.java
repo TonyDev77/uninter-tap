@@ -1,10 +1,12 @@
 package com.tony.minhanotificacao;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +24,17 @@ public class MainActivity extends Activity {
 
         btnNotifica = findViewById(R.id.btnNotifica);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("myNot", "myNot", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
         btnNotifica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(view.getContext())
+                        new NotificationCompat.Builder(view.getContext(), "myNot")
                                 .setSmallIcon(R.mipmap.ic_launcher)
                                 .setContentTitle("Minha notificacao")
                                 .setContentText("Olá, mundo!");
